@@ -13,7 +13,7 @@ class Ui_MainWindow(QWidget):
         
     def setupUi(self):
         self.setGeometry(300, 300, 300, 300)
-        self.setWindowTitle("MainWindow")
+        self.setWindowTitle("SSIMP")
         self.resize(800, 600)
         self.setMinimumSize(QtCore.QSize(800, 600))
         self.setMaximumSize(QtCore.QSize(800, 600))

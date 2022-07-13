@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
+import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui     import *
 from PyQt5.QtCore    import *
@@ -121,8 +122,6 @@ class Ui_MainWindow(QWidget):
         
         messages = list(self.s.split("\n"))
         messages = [x.lower() for x in messages if len(x) > 5]
-
-            #if not("Yes" in messages[i] or "No" in messages[i]):
                        
         results = model.predict(messages, k=5)
 
@@ -182,9 +181,21 @@ class Ui_MainWindow(QWidget):
             leg = ax.legend(loc='center', bbox_to_anchor=(0, -0.07), shadow=False, ncol=2)
 
             self.canvas.draw()
-            
-        
+        #-----------------------------
+        try:
+            listdir = [x for x in os.listdir() if "result" in x]
+            maks = 0
+            for i in listdir:
+                s = int(i[i.find("result")+6:i.find(".")])
+                if maks < s:
+                    maks = s    
 
+            file = open(f"result{maks+1}.txt", "w")
+            file.write(self.s)
+            file.close()
+        except:
+            None
+            
 if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)
